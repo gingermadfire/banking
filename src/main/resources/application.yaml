@@ -1,0 +1,29 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/banking
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  #liquibase:
+  #  change-log:
+  #  url: r2dbc:postgresql://localhost:5432/banking
+  #  user: postgres
+  #  password: postgres
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: gingermadfire-1
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    properties:
+      spring.json.trusted.packages: '*'
+
+banking:
+  kafka:
+    topic:
+      test-topic-1: test-topic-1
